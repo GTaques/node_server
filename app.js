@@ -48,11 +48,14 @@ app.get('/', function(req, res) {
 })
 
 app.post('/todo', function(req, res) {
-  createToDo(db, req.body);
-  // db.collection('todos').insertOne(req.body)
-  //   .then(result => {
-  //     console.log(result)
-  //   })
-  //   .catch(error => console.error(error));
+  db.collection('todos').insertOne(req.body)
+    .then(result => {
+      console.log(result)
+      res.send(`Object created successfully: ${result.insertedId}`)
+    })
+    .catch(error => {
+      console.error(error)
+      res.send(`Could not create object: ${error}`)
+    });
 })
 
