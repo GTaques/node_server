@@ -31,6 +31,16 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
 
 app.use(express.json())
 
+function createToDo(client, newToDo) {
+  client.collection('todos').insertOne(newToDo)
+    .then(result => {
+      console.log(result)
+    })
+    .catch(error => console.error(error));
+  // console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
+  // console.log(result.insertedIds);
+}
+
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
     console.log(db);
@@ -46,12 +56,3 @@ app.post('/todo', function(req, res) {
   //   .catch(error => console.error(error));
 })
 
-function createToDo(client, newToDo) {
-  client.collection('todos').insertOne(newToDo)
-    .then(result => {
-      console.log(result)
-    })
-    .catch(error => console.error(error));
-  // console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
-  // console.log(result.insertedIds);
-}
