@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.6"
   },
   "devDependencies": {},
   "scripts": {
@@ -19,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/GTaques/node_server/issues"
   },
-  "homepage": "https://github.com/GTaques/node_server#readme"
+  "homepage": "https://github.com/GTaques/node_server#readme",
+  "engines": {
+    "node": "12.16.2"
+  }
 }
