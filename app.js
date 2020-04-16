@@ -32,7 +32,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
 app.use(express.json())
 
 app.get('/', function(req, res) {
-    res.send("Seja bem vindo ")
+  res.sendFile(__dirname + '/index.html');
     console.log(db);
     console.log("Welcome to the app!");
 })
@@ -41,31 +41,9 @@ app.post('/todo', function(req, res) {
   db.collection('todos').insertOne(req.body)
     .then(result => {
       console.log(result)
-      res.send(result);
     })
-    .catch(error => { 
-      console.error(error)
-      res.send(error)
-    });
-    
-  // console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
-  // console.log(result.insertedIds);
-  
-  // createToDo(db, req.body);
+    .catch(error => console.error(error));
 })
-
-// app.get('/todos', function(req, res) {
-
-// })
-
-// let port = process.env.PORT;
-// if (port == null || port == "") {
-//   port = 8000;
-// }
-// app.listen(port, function() {
-//     console.log('App listening on PORT:', port)
-// });
-
 
 async function createToDo(client, newToDo) {
   const result = await db.collection('todos').insertOne(newToDo);
