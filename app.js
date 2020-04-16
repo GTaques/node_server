@@ -46,7 +46,7 @@ app.post('/todo', function(req, res) {
   //   .catch(error => console.error(error));
 })
 
-async function createToDo(client, newToDo) {
+function createToDo(client, newToDo) {
   client.collection('todos').insertOne(newToDo)
     .then(result => {
       console.log(result)
