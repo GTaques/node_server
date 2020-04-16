@@ -35,7 +35,7 @@ app.get('/', function(req, res) {
     res.send("Seja bem vindo ")
 })
 
-app.post('/todo', function(req, res) {
+app.get('/todo', function(req, res) {
   createToDo(db, {
     "title":"Funcionou",
     "priority": 5,
