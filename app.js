@@ -38,15 +38,20 @@ app.get('/', function(req, res) {
 })
 
 app.post('/todo', function(req, res) {
-  db.collection('todos').insertOne(req.body)
+  createToDo(db, req.body);
+  // db.collection('todos').insertOne(req.body)
+  //   .then(result => {
+  //     console.log(result)
+  //   })
+  //   .catch(error => console.error(error));
+})
+
+async function createToDo(client, newToDo) {
+  client.collection('todos').insertOne(newToDo)
     .then(result => {
       console.log(result)
     })
     .catch(error => console.error(error));
-})
-
-async function createToDo(client, newToDo) {
-  const result = await db.collection('todos').insertOne(newToDo);
-  console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
-  console.log(result.insertedIds);
+  // console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
+  // console.log(result.insertedIds);
 }
