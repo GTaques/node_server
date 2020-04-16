@@ -19,7 +19,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
   }
 
   // Save database object from the callback for reuse.
-  db = client.db('done_it');
+  db = client.db();
   console.log("Database connection ready");
 
   // Initialize the app.
@@ -38,8 +38,25 @@ app.get('/', function(req, res) {
 })
 
 app.post('/todo', function(req, res) {
-  createToDo(db, req.body)
+  const result = await db.collection('todos').insertOne(req.body);
+  console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
+  console.log(result.insertedIds);
+  res.send(`${result.insertedCount} new todo(s) created with the following id(s):`);
+  // createToDo(db, req.body);
 })
+
+// app.get('/todos', function(req, res) {
+
+// })
+
+// let port = process.env.PORT;
+// if (port == null || port == "") {
+//   port = 8000;
+// }
+// app.listen(port, function() {
+//     console.log('App listening on PORT:', port)
+// });
+
 
 async function createToDo(client, newToDo) {
   const result = await db.collection('todos').insertOne(newToDo);
