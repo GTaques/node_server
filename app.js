@@ -19,7 +19,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
   }
 
   // Save database object from the callback for reuse.
-  db = client.db();
+  db = client.db('done_it');
   console.log("Database connection ready");
 
   // Initialize the app.
@@ -33,31 +33,16 @@ app.use(express.json())
 
 app.get('/', function(req, res) {
     res.send("Seja bem vindo ")
+    console.log(db);
+    console.log("Welcome to the app!");
 })
 
-app.get('/todo', function(req, res) {
-  createToDo(db, {
-    "title":"Funcionou",
-    "priority": 5,
-    "createdAt": Date.now()
-  })
+app.post('/todo', function(req, res) {
+  createToDo(db, req.body)
 })
-
-// app.get('/todos', function(req, res) {
-
-// })
-
-// let port = process.env.PORT;
-// if (port == null || port == "") {
-//   port = 8000;
-// }
-// app.listen(port, function() {
-//     console.log('App listening on PORT:', port)
-// });
-
 
 async function createToDo(client, newToDo) {
-  const result = await client.db('done_it').collection('todos').insertOne(newToDo);
+  const result = await db.collection('todos').insertOne(newToDo);
   console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
   console.log(result.insertedIds);
 }
