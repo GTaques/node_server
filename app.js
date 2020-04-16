@@ -35,6 +35,14 @@ app.get('/', function(req, res) {
     res.send("Seja bem vindo ")
 })
 
+app.post('/todo', function(req, res) {
+  createToDo(db, {
+    "title":"Funcionou",
+    "priority": 5,
+    "createdAt": Date.now()
+  })
+})
+
 // app.get('/todos', function(req, res) {
 
 // })
@@ -48,8 +56,8 @@ app.get('/', function(req, res) {
 // });
 
 
-// async function createToDo(client, newToDo) {
-//   const result = await client.db('done_it').collection('todos').insertOne(newToDo);
-//   console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
-//   console.log(result.insertedIds);
-// }
+async function createToDo(client, newToDo) {
+  const result = await client.db('done_it').collection('todos').insertOne(newToDo);
+  console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
+  console.log(result.insertedIds);
+}
