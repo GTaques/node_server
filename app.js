@@ -38,10 +38,10 @@ app.get('/', function(req, res) {
 })
 
 app.post('/todo', function(req, res) {
-  const result = await db.collection('todos').insertOne(req.body);
-  console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
-  console.log(result.insertedIds);
-  res.send(`${result.insertedCount} new todo(s) created with the following id(s):`);
+  // const result = await db.collection('todos').insertOne(req.body);
+  // console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
+  // console.log(result.insertedIds);
+  res.send(req.body);
   // createToDo(db, req.body);
 })
 
