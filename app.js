@@ -39,13 +39,13 @@ app.get('/', function(req, res) {
 
 // })
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 8000;
-}
-app.listen(port, function() {
-    console.log('App listening on PORT:', port)
-});
+// let port = process.env.PORT;
+// if (port == null || port == "") {
+//   port = 8000;
+// }
+// app.listen(port, function() {
+//     console.log('App listening on PORT:', port)
+// });
 
 
 // async function createToDo(client, newToDo) {
