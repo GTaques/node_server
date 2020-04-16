@@ -31,16 +31,6 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
 
 app.use(express.json())
 
-function createToDo(client, newToDo) {
-  client.collection('todos').insertOne(newToDo)
-    .then(result => {
-      console.log(result)
-    })
-    .catch(error => console.error(error));
-  // console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
-  // console.log(result.insertedIds);
-}
-
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
     console.log(db);
@@ -57,5 +47,29 @@ app.post('/todo', function(req, res) {
       console.error(error)
       res.send(`Could not create object: ${error}`)
     });
+})
+
+app.post('/todos', function(req, res) {
+  db.collection('todos').insertMany(req.body)
+    .then(result => {
+      console.log(result);
+      res.send(`Object(s) created successfully: ${result.insertedIds}`)
+    })
+    .catch(error => {
+      console.error(error)
+      res.send(`Could not create object(s): ${error}`)
+    });
+})
+
+app.get('/todo', function(req, res) {
+  db.collection('todos').findOne({ title: req.body['title'] })
+    .then(result => {
+      console.log(result);
+      res.send(`Successfully found an object by the name: ${result.title}`);
+    })
+    .catch(error => {
+      console.error(error);
+      res.send(`Could not find any object by the title: ${req.body['title']}`);
+    })
 })
 
