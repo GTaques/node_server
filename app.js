@@ -23,7 +23,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
   console.log("Database connection ready");
 
   // Initialize the app.
-  var server = app.listen(process.env.PORT || 8080, function () {
+  var server = app.listen(process.env.PORT || 8000, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
   });
@@ -35,6 +35,10 @@ app.get('/', function(req, res) {
     res.send("Seja bem vindo ")
 })
 
+app.get('/todos', function(req, res) {
+
+})
+
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
@@ -42,3 +46,10 @@ if (port == null || port == "") {
 app.listen(port, function() {
     console.log('App listening on PORT:', port)
 });
+
+
+async function createToDo(client, newToDo) {
+  const result = await client.db('done_it').collection('todos').insertOne(newToDo);
+  console.log(`${result.insertedCount} new todo(s) created with the following id(s):`);
+  console.log(result.insertedIds);
+}
