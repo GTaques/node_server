@@ -14,7 +14,7 @@ app.use('/todos', todosRoutes);
 
 //ROUTES
 app.get('/', (req, res) => {
-  res.send("Yay, we're home!")
+  res.sendFile(__dirname + '/index.html')
 })
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", { useUnifiedTopology: true }, function (err, client) {
