@@ -3,22 +3,65 @@ const ToDo = require('../models/ToDo');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send("We're on todos!");
+//Retrieve todos
+router.get('/', async (req, res) => {
+    try{
+        const todos = await ToDo.find();
+        res.json(todos);
+    } catch(err) {
+        res.json({ message: err });
+    }
+    
 })
 
-router.post('/', (req, res) => {
+//Create todo
+router.post('/', async (req, res) => {
     const todo = new ToDo({
         title: req.body.title,
         priority: req.body.priority
     })
-    todo.save()
-        .then(data => {
-            res.json(data);
-        })
-        .catch(error => {
-            res.json({ message: error });
-        })
+    try {
+        const savedTodo = await todo.save();
+        res.json(savedTodo);
+    } catch(err) {
+        res.json({ message: err })
+    }
+})
+
+//Specific ID
+router.get('/:todoId', async (req, res) => {
+    try {
+        const todo = await ToDo.findById(req.params.todoId);
+        res.json(todo);
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
+
+//Delete
+router.delete('/:todoId', async (req, res) => {
+    try {
+        const removedToDo = await ToDo.remove({_id: req.params.todoId});
+        res.json(removedToDo)
+    } catch(err) {
+        res.json({ message: err });
+    }
+})
+
+//Update
+router.patch('/:todoId', async (req, res) => {
+    try {
+        const updatedTodo = await ToDo.updateOne(
+            { _id: req.params.postId }, 
+            { $set: { 
+                title: req.body.title,
+                priority: req.body.priority
+                }
+            })
+        res.json(updatedTodo);
+    } catch(err) {
+        res.json({ message: err });
+    }
 })
 
 module.exports = router;
