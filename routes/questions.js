@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
     try{
         const questions = await Question.find();
         res.json(questions);
+        console.log("Questions")
     } catch(err) {
         res.json({ message: err });
     }
@@ -23,6 +24,7 @@ router.post('/', async (req, res) => {
     try {
         const savedQuestion = await question.save();
         res.json(savedQuestion);
+        console.log("Created!")
     } catch(err) {
         res.json({ message: err })
     }
@@ -40,11 +42,14 @@ router.get('/:questionId', async (req, res) => {
 
 //Delete
 router.delete('/:questionId', async (req, res) => {
+    console.log("Entrou no delete!")
     try {
         const removedQuestion = await Question.remove({_id: req.params.questionId});
         res.json(removedQuestion)
+        console.log(`Deleted Question: ${removedQuestion}`)
     } catch(err) {
-        res.json({ message: err });
+        console.error(err);
+        res.json({ message: err.data });
     }
 })
 

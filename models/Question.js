@@ -11,10 +11,6 @@ const QuestionSchema = mongoose.Schema({
         required: false,
         default: 'Anonymous'
     },
-    answers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Answer",
-    }],
     upvotes: {
         type: Number,
         default: 0

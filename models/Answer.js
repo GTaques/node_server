@@ -17,6 +17,10 @@ const AnswerSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    ownerQuestion: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Question",
+    },
     createdAt: {
         type: Date,
         default: Date.now()

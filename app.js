@@ -15,6 +15,9 @@ app.use('/todos', todosRoutes);
 const questionsRoutes = require('./routes/questions');
 app.use('/questions', questionsRoutes)
 
+const answersRoutes = require('./routes/answers');
+app.use('/answers', answersRoutes);
+
 //ROUTES
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
