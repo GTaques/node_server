@@ -12,6 +12,9 @@ app.use(bodyParser.json());
 const todosRoutes = require('./routes/todos');
 app.use('/todos', todosRoutes);
 
+const questionsRoutes = require('./routes/questions');
+app.use('/questions', questionsRoutes)
+
 //ROUTES
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')

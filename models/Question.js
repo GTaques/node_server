@@ -11,11 +11,10 @@ const QuestionSchema = mongoose.Schema({
         required: false,
         default: 'Anonymous'
     },
-    answers: {
-        type: [Answer],
-        required: false,
-        default: []
-    },
+    answers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Answer",
+    }],
     upvotes: {
         type: Number,
         default: 0
@@ -31,4 +30,4 @@ const QuestionSchema = mongoose.Schema({
 
 })
 
-module.exports = mongoose.models('Questions', QuestionSchema);
+module.exports = mongoose.model('Questions', QuestionSchema);
