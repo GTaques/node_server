@@ -33,9 +33,20 @@ router.post('/', async (req, res) => {
 router.get('/:answerId', async (req, res) => {
     try {
         const answer = await Answer.findById(req.params.answerId);
+
         res.json(answer);
     } catch (err) {
         res.json({ message: err });
+    }
+})
+
+router.get('/q/:questionId', async (req,res) => {
+    try {
+        const answers = await Answer.find({ownerQuestion: req.params.questionId});
+        res.json(answers);
+        console.log("Executando a do question")
+    } catch (err) {
+        res.json({message: err});
     }
 })
 
