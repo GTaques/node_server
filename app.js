@@ -29,7 +29,7 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
           "apps": [],
           "details": [
               {
-                  "appID": "Q7TRVLH49F.com.taquesboringcompany.ABakersJourney",
+                  "appID": "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney",
                   "paths": ["*"],
               }
           ]
