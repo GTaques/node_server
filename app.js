@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
-app.get('/apple-app-site-associate', async (req, res) => {
+app.get('/.well-known/apple-app-site-associate', async (req, res) => {
   const appleInfo = {
       "applinks": {
           "apps": [],
