@@ -69,7 +69,7 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
      }
   }
   try {
-      res.json(appleInfo);
+      res.json(appInfo);
   } catch(err) {
       console.log("Deu ruim ermao!");
       res.json({message: err});
