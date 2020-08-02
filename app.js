@@ -23,6 +23,27 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
+app.get('/apple-app-site-associate', async (req, res) => {
+  const appleInfo = {
+      "applinks": {
+          "apps": [],
+          "details": [
+              {
+                  "appID": "Z9M62WF3J6.com.taquesboringcompany.MarvelLib",
+                  "paths": ["*"],
+              }
+          ]
+      }
+  }
+  try {
+      res.json(appleInfo);
+  } catch(err) {
+      console.log("Deu ruim ermao!");
+      res.json({message: err});
+  }
+  
+})
+
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", { useUnifiedTopology: true }, function (err, client) {
   if (client) {
     console.log("We're connected!")
