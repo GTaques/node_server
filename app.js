@@ -94,6 +94,10 @@ const appInfo2 = {
   
 })
 
+app.get('/teste', (req, res) => {
+  res.json("{ 'teste' : 'dale' }")
+})
+
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", { useUnifiedTopology: true }, function (err, client) {
   if (client) {
     console.log("We're connected!")
