@@ -1,11 +1,13 @@
 {
-      "applinks": {
-          "apps": [],
-          "details": [
-              {
-                  "appIDs": ["Z9M62WF3J6.com.taquesboringcompany.ABakersJourney"],
-                  "components": ["*"],
-              }
-          ]
-      }
-  }
+    "applinks": {
+        "details": [
+             {
+               "appIDs": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney" ],
+               "components": ["*"]
+             }
+         ]
+     },
+     "webcredentials": {
+        "apps": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney" ]
+     }
+}
