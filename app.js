@@ -85,7 +85,7 @@ const appInfo2 = {
 }
   try {
       console.log(__dirname + '/.well-knwon/apple-app-site-association');
-      res.setHeader('content-type', 'application/json');
+      res.set('content-type', 'application/json;charset=utf-8');
       res.json(appInfo);
   } catch(err) {
       console.log("Deu ruim ermao!");
