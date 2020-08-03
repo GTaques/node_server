@@ -85,7 +85,7 @@ const appInfo2 = {
 }
   try {
       console.log(__dirname + '/.well-knwon/apple-app-site-association');
-      res.sendFile('/.well-known/apple-app-site-association');
+      res.json(appInfo);
   } catch(err) {
       console.log("Deu ruim ermao!");
       res.json({message: err});
