@@ -31,7 +31,7 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
           "apps": [],
           "details": [
               {
-                  "appIDs": ["Z9M62WF3J6.com.taquesboringcompany.ABakersJourney", "Q7TRVLH49F.com.taquesboringcompany.ABakersJourney"],
+                  "appIDs": ["Z9M62WF3J6.com.taquesboringcompany.ABakersJourney"],
                   "components": ["*"],
               }
           ]
@@ -52,7 +52,7 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
 }
   try {
       console.log(__dirname + '/.well-knwon/apple-app-site-association');
-      res.json(appInfo);
+      res.json(appleInfo);
   } catch(err) {
       console.log("Deu ruim ermao!");
       res.json({message: err});
