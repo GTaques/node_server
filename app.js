@@ -8,7 +8,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.json());
 
-// app.use(express.static(__dirname));
+app.use(express.static(__dirname));
 
 //Import Routes
 const todosRoutes = require('./routes/todos');
@@ -53,7 +53,7 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
   try {
       console.log(__dirname + '/.well-knwon/apple-app-site-association');
       // res.json(appleInfo);
-      res.send(path.join(__dirname, '/.well-knwon/apple-app-site-association'));
+      res.send('/.well-knwon/apple-app-site-association');
   } catch(err) {
       console.log("Deu ruim ermao!");
       res.json({message: err});
