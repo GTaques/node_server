@@ -41,35 +41,48 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
     "applinks": {
         "details": [
              {
-               "appIDs": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney", "Q7TRVLH49F.com.taquesboringcompany.ABakersJourney" ],
-               "components": [
-                 {
-                    "#": "no_universal_links",
-                    "exclude": true,
-                    "comment": "Matches any URL whose fragment equals no_universal_links and instructs the system not to open it as a universal link"
-                 },
-                 {
-                    "/": "/buy/*",
-                    "comment": "Matches any URL whose path starts with /buy/"
-                 },
-                 {
-                    "/": "/help/website/*",
-                    "exclude": true,
-                    "comment": "Matches any URL whose path starts with /help/website/ and instructs the system not to open it as a universal link"
-                 },
-                 {
-                    "/": "/help/*",
-                    "?": { "articleNumber": "????" },
-                    "comment": "Matches any URL whose path starts with /help/ and which has a query item with name 'articleNumber' and a value of exactly 4 characters"
-                 }
-               ]
+               "appIDs": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney"],
+               "components": ["*"]
              }
          ]
      },
      "webcredentials": {
-        "apps": [ "ABCDE12345.com.example.app" ]
+        "apps": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney" ]
      }
-  }
+}
+const appInfo2 = {
+  "applinks": {
+      "details": [
+           {
+             "appIDs": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney"],
+             "components": [
+               {
+                  "#": "no_universal_links",
+                  "exclude": true,
+                  "comment": "Matches any URL whose fragment equals no_universal_links and instructs the system not to open it as a universal link"
+               },
+               {
+                  "/": "/buy/*",
+                  "comment": "Matches any URL whose path starts with /buy/"
+               },
+               {
+                  "/": "/help/website/*",
+                  "exclude": true,
+                  "comment": "Matches any URL whose path starts with /help/website/ and instructs the system not to open it as a universal link"
+               },
+               {
+                  "/": "/help/*",
+                  "?": { "articleNumber": "????" },
+                  "comment": "Matches any URL whose path starts with /help/ and which has a query item with name 'articleNumber' and a value of exactly 4 characters"
+               }
+             ]
+           }
+       ]
+   },
+   "webcredentials": {
+      "apps": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney" ]
+   }
+}
   try {
       console.log(__dirname + '/.well-knwon/apple-app-site-association');
       res.sendFile('/.well-known/apple-app-site-association');
