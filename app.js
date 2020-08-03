@@ -53,6 +53,7 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
   try {
       console.log(__dirname + '/.well-knwon/apple-app-site-association');
       // res.json(appleInfo);
+      res.set('content-type', 'application/pkcs7-mime')
       res.send('/.well-knwon/apple-app-site-association');
   } catch(err) {
       console.log("Deu ruim ermao!");
