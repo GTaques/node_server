@@ -8,7 +8,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname));
+// app.use(express.static(__dirname));
 
 //Import Routes
 const todosRoutes = require('./routes/todos');
@@ -50,42 +50,8 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
         "apps": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney" ]
      }
 }
-const appInfo2 = {
-  "applinks": {
-      "details": [
-           {
-             "appIDs": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney"],
-             "components": [
-               {
-                  "#": "no_universal_links",
-                  "exclude": true,
-                  "comment": "Matches any URL whose fragment equals no_universal_links and instructs the system not to open it as a universal link"
-               },
-               {
-                  "/": "/buy/*",
-                  "comment": "Matches any URL whose path starts with /buy/"
-               },
-               {
-                  "/": "/help/website/*",
-                  "exclude": true,
-                  "comment": "Matches any URL whose path starts with /help/website/ and instructs the system not to open it as a universal link"
-               },
-               {
-                  "/": "/help/*",
-                  "?": { "articleNumber": "????" },
-                  "comment": "Matches any URL whose path starts with /help/ and which has a query item with name 'articleNumber' and a value of exactly 4 characters"
-               }
-             ]
-           }
-       ]
-   },
-   "webcredentials": {
-      "apps": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney" ]
-   }
-}
   try {
       console.log(__dirname + '/.well-knwon/apple-app-site-association');
-      res.set('content-type', 'application/json;charset=utf-8');
       res.json(appInfo);
   } catch(err) {
       console.log("Deu ruim ermao!");
