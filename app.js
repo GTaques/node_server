@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
   try {
     // res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     
-    res.sendFile(__dirname + "/.well-known/apple-app-site-association");
+    res.sendFile(__dirname + "/index.html");
   } catch (err) {
     console.log("Deu ruim ermao!");
     res.json({ message: err });
