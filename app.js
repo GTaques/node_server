@@ -41,7 +41,7 @@ app.use(nocache());
 // app.disable('view cache');
 
 //ROUTES
-app.get("/", (req, res) => {
+app.get("/hello", (req, res) => {
   try {
     // res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     
@@ -56,17 +56,6 @@ app.get("/", (req, res) => {
 ///.well-known/apple-app-site-association
 
 app.get("/.well-known/apple-app-site-association", async (req, res) => {
-  const appleInfo = {
-    applinks: {
-      apps: [],
-      details: [
-        {
-          appIDs: ["Z9M62WF3J6.com.taquesboringcompany.ABakersJourney"],
-          components: ["*"],
-        },
-      ],
-    },
-  };
   const appInfo = {
     "applinks": {
         "details": [
