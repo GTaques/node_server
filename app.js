@@ -10,7 +10,7 @@ const onHeaders = require("on-headers");
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname));
+// app.use(express.static(__dirname));
 
 //Import Routes
 const todosRoutes = require("./routes/todos");
@@ -55,7 +55,7 @@ app.get("/", (req, res) => {
 
 ///.well-known/apple-app-site-association
 
-app.get("/apple-info", async (req, res) => {
+app.get("/.well-known/apple-app-site-association", async (req, res) => {
   const appleInfo = {
     applinks: {
       apps: [],
@@ -68,21 +68,21 @@ app.get("/apple-info", async (req, res) => {
     },
   };
   const appInfo = {
-    applinks: {
-      details: [
-        {
-          appIDs: ["Z9M62WF3J6.com.taquesboringcompany.ABakersJourney"],
-          components: ["*"],
-        },
-      ],
-    },
-    webcredentials: {
-      apps: ["Z9M62WF3J6.com.taquesboringcompany.ABakersJourney"],
-    },
-  };
+    "applinks": {
+        "details": [
+             {
+               "appIDs": [ "Z9M62WF3J6.com.taquesboringcompany.ABakersJourney"],
+               "components": [{
+                   "/": "/*",
+                   "comment": "Matches any URL"
+               }]
+             }
+         ]
+     }
+};
   try {
     // res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-    res.sendFile(__dirname + "/.well-known/apple-app-site-association");
+    res.json(appInfo);
   } catch (err) {
     console.log("Deu ruim ermao!");
     res.json({ message: err });
