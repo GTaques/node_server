@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 
 ///.well-known/apple-app-site-association
 
-app.get('/.well-known/apple-app-site-association', async (req, res) => {
+app.get('/apple-info', async (req, res) => {
   const appleInfo = {
       "applinks": {
           "apps": [],
@@ -74,7 +74,7 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
 }
   try {
       // res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-      res.send(JSON.stringify(appInfo));
+      res.sendFile(__dirname + '/.well-known/apple-app-site-association');
   } catch(err) {
       console.log("Deu ruim ermao!");
       res.json({message: err});
