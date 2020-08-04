@@ -44,6 +44,7 @@ app.use(nocache());
 app.get("/", (req, res) => {
   try {
     // res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    
     res.sendFile(__dirname + "/.well-known/apple-app-site-association");
   } catch (err) {
     console.log("Deu ruim ermao!");
