@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const nocache = require('nocache');
+const onHeaders = require('on-headers');
 
 //Middlewares
 app.use(cors());
@@ -20,10 +22,30 @@ app.use('/questions', questionsRoutes)
 const answersRoutes = require('./routes/answers');
 app.use('/answers', answersRoutes);
 
+// app.use((req, res, next) => {
+//   res.set('Cache-Control', 'no-store')
+//   next()
+// })
+
+app.use(nocache());
+
+// install it as a middleware
+// app.use((req, res, next) => {
+//   // listen for the headers event
+//   onHeaders(res, () => {
+//       this.removeHeader('ETag');
+//   });
+// });
+
+// app.set('etag', false);
+// app.disable('view cache');
+
 //ROUTES
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
+
+///.well-known/apple-app-site-association
 
 app.get('/.well-known/apple-app-site-association', async (req, res) => {
   const appleInfo = {
@@ -51,15 +73,8 @@ app.get('/.well-known/apple-app-site-association', async (req, res) => {
      }
 }
   try {
-      console.log(__dirname + '/.well-knwon/apple-app-site-association');
-      res.json("{ 'teste': 'dale' }");
-      // res.type('Content-Type', 'application/json; charset=utf-8')
-      // res.setHeader('Content-Type', 'application/json');
-      // res.type('json');
-      // res.header("Content-Type", "application/application/json");
-      // res.header("Content-Type", "text/cache-manifest");
-      // res.end("CACHE MANIFEST");
-      // res.send(JSON.stringify(appInfo));
+      // res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      res.send(JSON.stringify(appInfo));
   } catch(err) {
       console.log("Deu ruim ermao!");
       res.json({message: err});
@@ -79,5 +94,5 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", { 
   }
 })
 
-app.listen(process.env.PORT || 3001);
+app.listen(process.env.PORT || 3002);
 
